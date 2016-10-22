@@ -1,3 +1,14 @@
+var app = new Vue({
+  el: '#app',
+  data: {
+    map: null,
+    message: 'Hello Vue!'
+  },
+  created: function() {
+    console.log('created!');
+  }
+});
+
 mapboxgl.accessToken = 'pk.eyJ1IjoidXRhLW1vYmkiLCJhIjoiNTU0N2FiOWM2NjEyMzUyNjc4NTg5M2I1MGM0YjM2N2IifQ.S4guINAIENtuxT6KVlId-g';
 var map = new mapboxgl.Map({
     container: 'map',

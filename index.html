@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="styles.css" rel="stylesheet">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css" rel="stylesheet" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js"></script>
+    <link href="node_modules/mapbox-gl/dist/mapbox-gl.css" rel="stylesheet" />
   </head>
   <body> 
 
-    <div id="map"></div>
+    <div id="app">
+      <div id="map"></div>
+    </div>
     
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/mapbox-gl/dist/mapbox-gl.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
