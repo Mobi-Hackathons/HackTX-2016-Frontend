@@ -14,9 +14,11 @@
       <div id="sidebar">
         <h4 class="sidebar-header">Date</h4>
         <div id="slider"></div>
-        <span id="event-start" class="dates"></span>
-        <br>
-        <span id="event-end"  class="dates"></span>
+
+        <div id="event-start">{{startDate.date}}</div>
+        <div id="event-end">{{endDate.date}}</div>
+
+        <div class="clearfix"></div>
 
 
         <h4 class="sidebar-header">Filters</h4>
@@ -48,6 +50,7 @@
     <script src="node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="node_modules/nouislider/distribute/nouislider.min.js"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
+    <script src="node_modules/moment/min/moment.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

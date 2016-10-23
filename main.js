@@ -1,17 +1,6 @@
-//good coding practices
-var weekdays = [
-        "Sunday", "Monday", "Tuesday",
-        "Wednesday", "Thursday", "Friday",
-        "Saturday"
-];
-var months = [
-        "January", "February", "March",
-        "April", "May", "June", "July",
-        "August", "September", "October",
-        "November", "December"
-];
-
-
+var momentNow = parseInt(moment().format('x'));
+var momentPrevious = parseInt(moment().subtract(1,'years').format('x'));
+//create default moments
 
 var app = new Vue({
   el: '#app',
@@ -44,7 +33,13 @@ var app = new Vue({
         icon: 'face_sad',
         selected: true
       }
-    ]
+    ],
+    startDate:{
+        date:'test'
+    },
+    endDate:{
+        date:'test'
+    }
   },
   created: function() {
     console.log('created!');
@@ -61,11 +56,14 @@ var app = new Vue({
 // Slider
 var slider = document.getElementById('slider');
 
+console.log(momentNow);
+console.log(momentPrevious);
+
 noUiSlider.create(slider, {
 	// Create two timestamps to define a range.
     range: {
-        min: timestamp('2010'),
-        max: timestamp('2016')
+        'min': momentPrevious,
+        'max': momentNow
     },
     connect: true,
 
@@ -73,18 +71,21 @@ noUiSlider.create(slider, {
     step: 7 * 24 * 60 * 60 * 1000,
 
     // Two more timestamps indicate the handle starting positions.
-    start: [ timestamp('2011'), timestamp('2015') ],
+    start: [ momentPrevious, momentNow],
 
 });
-
-var dateValues = [
-    document.getElementById('event-start'),
-    document.getElementById('event-end')
-];
-
 slider.noUiSlider.on('update', function( values, handle ) {
-    dateValues[handle].innerHTML = formatDate(new Date(+values[handle]));
+    console.log(values);
+    console.log(handle);
+    if(handle==0){
+        app.startDate.date= moment(parseInt(values[handle])).format('MM-DD-YYYY');
+    }else{
+        app.endDate.date= moment(parseInt(values[handle])).format('MM-DD-YYYY');
+    }
+    
+
 });
+
 
 // ChartJS
 var radarContext = document.getElementById("radar-chart").getContext("2d");
@@ -121,30 +122,6 @@ var radarChart = new Chart(radarContext, {
     //options: options
 });
 
-// Append a suffix to dates.
-// Example: 23 => 23rd, 1 => 1st.
-function nth (d) {
-  if(d>3 && d<21) return 'th';
-  switch (d % 10) {
-        case 1:  return "st";
-        case 2:  return "nd";
-        case 3:  return "rd";
-        default: return "th";
-    }
-}
-
-// Create a string representation of the date.
-function formatDate ( date ) {
-    return weekdays[date.getDay()] + ", " +
-        date.getDate() + nth(date.getDate()) + " " +
-        months[date.getMonth()] + " " +
-        date.getFullYear();
-}
-
-// Create a new date from a string, return as a timestamp.
-function timestamp(str){
-    return new Date(str).getTime();   
-}
 
 // Mapbox
 mapboxgl.accessToken = 'pk.eyJ1IjoidXRhLW1vYmkiLCJhIjoiNTU0N2FiOWM2NjEyMzUyNjc4NTg5M2I1MGM0YjM2N2IifQ.S4guINAIENtuxT6KVlId-g';

@@ -120,3 +120,22 @@ html, body {
   padding: 10px 10px 5px;
   border-bottom: 1px solid #396CAB;
 }
+
+#event-start{
+    float:left;
+    margin:15px;
+    margin-left:40px;
+}
+#event-end{
+    float:right;
+    margin:15px;
+    margin-right:40px;
+}
+
+.clearfix { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
