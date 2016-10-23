@@ -119,6 +119,7 @@ html, body {
       height: 30px;
       vertical-align: middle;
       filter: grayscale(100%);
+      transition: all 0.2s linear;
     }
 
     &.selected {

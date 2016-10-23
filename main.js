@@ -149,18 +149,12 @@ var lineChart = new Chart(lineContext,{
 
 
 slider.noUiSlider.on('update', function( values, handle ) {
-    console.log(values);
-    console.log(handle);
-    
     // moving left bar
     if(handle==0){
         dateLabels=[];
         var tempNow = moment(parseInt(values[handle]));
         var tempThen = moment(parseInt(values[1]));
         app.startDate.date= moment(parseInt(values[handle])).format('MM-DD-YYYY');
-
-        // update data
-
         // push dates onto date labels
         while(tempNow.isBefore(tempThen)){
             dateLabels.push(tempNow.format('MM-DD-YYYY'));
@@ -175,9 +169,29 @@ slider.noUiSlider.on('update', function( values, handle ) {
             backgroundColor:"#FF0000",
             data:lineData
         })
-        console.log(dateLabels);
     }else{
+        dateLabels=[];
+        var tempNow = moment(parseInt(values[0]));
+        var tempThen = moment(parseInt(values[handle]));
         app.endDate.date= moment(parseInt(values[handle])).format('MM-DD-YYYY');
+        // update data
+
+        // push dates onto date labels
+        while(tempThen.isAfter(tempNow)){
+            dateLabels.unshift(tempThen.format('MM-DD-YYYY'));
+            tempThen.subtract(1,'week');
+        }
+
+        
+        //override date (x axis) labels
+        lineData.labels = dateLabels;
+        // create new line chart and override old one (kinda shitty, probably a memory leak)
+        var lineChart = new Chart(lineContext,{
+            type:'line',
+            backgroundColor:"#FF0000",
+            data:lineData
+        })
+        
     }
     
 
