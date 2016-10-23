@@ -51,11 +51,13 @@ html, body {
 
 .filters li {
   list-style: none;
-  background: #396CAB;
+  background: transparent;
   padding: 5px;
   border-radius: 2px;
   margin: 5px;
   font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s linear;
 }
 
 .filters li .filter-text {
@@ -66,6 +68,15 @@ html, body {
   width: 30px;
   height: 30px;
   vertical-align: middle;
+  filter: grayscale(100%);
+}
+
+.filters .selected {
+  background: #396CAB;
+}
+
+.filters li.selected img {
+  filter: grayscale(0%);
 }
 
 .hidden {

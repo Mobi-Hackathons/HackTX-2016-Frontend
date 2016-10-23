@@ -15,7 +15,7 @@
 
         <h4>Filters</h4>
         <ul class="filters">
-          <li v-for="filter in filters">
+          <li v-for="filter in filters" v-on:click="filter.selected = !filter.selected" v-bind:class="{selected: filter.selected}">
             <img v-bind:src="'images/' + filter.icon + '.png'">
             <span class="filter-text">{{ filter.title }}</span>
           </li>

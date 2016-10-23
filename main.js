@@ -6,23 +6,28 @@ var app = new Vue({
     filters: [
       {
         title: 'Surprising',
-        icon: 'face_surprise'
+        icon: 'face_surprise',
+        selected: true
       },
       {
         title: 'Haha',
-        icon: 'face_laugh'
+        icon: 'face_laugh',
+        selected: true
       },
       {
         title: 'Love',
-        icon: 'face_love'
+        icon: 'face_love',
+        selected: true
       },
       {
         title: 'Angry',
-        icon: 'face_angry'
+        icon: 'face_angry',
+        selected: true
       },
       {
         title: 'Sad',
-        icon: 'face_sad'
+        icon: 'face_sad',
+        selected: true
       }
     ]
   },
