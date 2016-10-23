@@ -205,40 +205,11 @@ var map = new mapboxgl.Map({
     zoom: 3
 });
 
+function addPointJSON(map, data) {
+
+}
 
 map.on('load', function() {
-
-    // Add a new source from our GeoJSON data and set the
-    // 'cluster' option to true.
-    map.addSource("earthquakes", {
-        type: "geojson",
-        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-        // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: "earthquakes.geojson",
-        cluster: true,
-        clusterMaxZoom: 14, // Max zoom to cluster points on
-        clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
-    });
-
-    // Use the earthquakes source to create five layers:
-    // One for unclustered points, three for each cluster category,
-    // and one for cluster labels.
-    map.addLayer({
-        "id": "unclustered-points",
-        "type": "symbol",
-        "source": "earthquakes",
-        "filter": ["!has", "point_count"],
-        "layout": {
-            "icon-image": "marker-15"
-        }
-    });
-
-    // 5 layers per emotion
-    // sad = 000080 = navy
-    // surprising = DFF51D = yellow
-    // love = EE1DF5 = pink
-    // angry = F51D1D = red
-    // haha = FF7700 = orange
     var layers = [
         [200, '#000080'],
         [150, '#ee1df5'],
@@ -247,38 +218,146 @@ map.on('load', function() {
         [0, '#ff7700']
     ];
 
-    layers.forEach(function (layer, i) {
-        console.log(i);
-        map.addLayer({
-            "id": "cluster-" + i,
-            "type": "circle",
-            "source": "earthquakes",
-            "paint": {
-                "circle-color": layer[1],
-                "circle-radius": 18
-            },
-            "filter": i === 0 ?
-                [">=", "point_count", layer[0]] :
-                ["all",
-                    [">=", "point_count", layer[0]],
-                    ["<", "point_count", layers[i - 1][0]]]
+    $.get('https://hacktx-emotions.herokuapp.com/api/posts', function(data) {
+        console.log('got data');
+
+        var pointdata = [];
+        
+        for(var i in data) {
+            console.log(i);
+            var p = data[i];
+            console.log(p.location.coords);
+            
+            pointdata.push({
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [
+                        p.location.coords.lng,
+                        p.location.coords.lat,
+                    ],
+                    properties: {
+                        icon: 'marker-15'
+                    }
+                }
+            })
+
+            // for(var post of p.posts) {
+            //     pointdata.push({
+            //         type: 'Feature',
+            //         geometry: {
+            //             type: 'Point',
+            //             coordinates: [
+            //                 p.location.coords.lng,
+            //                 p.location.coords.lat,
+            //             ],
+            //             properties: {
+            //                 icon: 'marker-15'
+            //             }
+            //         }
+            //     })
+            // }
+        }
+
+        map.addSource('earthquakes', {
+            type: 'geojson',
+            cluster: true,
+            data: {
+                type: 'FeatureCollection',
+                features: pointdata
+            }
         });
+
+        console.log(pointdata);
+
+        map.addLayer({
+            "id": "unclustered-points",
+            "type": "symbol",
+            "source": "earthquakes",
+            "filter": ["!has", "point_count"],
+            "layout": {
+                "icon-image": "marker-15"
+            }
+        });
+
+        layers.forEach(function (layer, i) {
+            map.addLayer({
+                "id": "cluster-" + i,
+                "type": "circle",
+                "source": "earthquakes",
+                "paint": {
+                    "circle-color": layer[1],
+                    "circle-radius": 18
+                },
+                "filter": i === 0 ?
+                    [">=", "point_count", layer[0]] :
+                    ["all",
+                        [">=", "point_count", layer[0]],
+                        ["<", "point_count", layers[i - 1][0]]]
+            });
+        });
+
+        // map.addLayer({
+        //     "id": "cluster-count",
+        //     "type": "symbol",
+        //     "source": "earthquakes",
+        //     "layout": {
+        //         "text-field": "{point_count}",
+        //         "text-font": [
+        //             "DIN Offc Pro Medium",
+        //             "Arial Unicode MS Bold"
+        //         ],
+        //         "text-size": 12
+        //     }
+        // });
     });
 
+    // Add a new source from our GeoJSON data and set the
+    // 'cluster' option to true.
+    // map.addSource("earthquakes", {
+    //     type: "geojson",
+    //     // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
+    //     // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+    //     data: "earthquakes.geojson",
+    //     cluster: true,
+    //     clusterMaxZoom: 14, // Max zoom to cluster points on
+    //     clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+    // });
+
+    // Use the earthquakes source to create five layers:
+    // One for unclustered points, three for each cluster category,
+    // and one for cluster labels.
+    // map.addLayer({
+    //     "id": "unclustered-points",
+    //     "type": "symbol",
+    //     "source": "earthquakes",
+    //     "filter": ["!has", "point_count"],
+    //     "layout": {
+    //         "icon-image": "marker-15"
+    //     }
+    // });
+
+    // 5 layers per emotion
+    // sad = 000080 = navy
+    // surprising = DFF51D = yellow
+    // love = EE1DF5 = pink
+    // angry = F51D1D = red
+    // haha = FF7700 = orange
+
     // Add a layer for the clusters' count labels
-    map.addLayer({
-        "id": "cluster-count",
-        "type": "symbol",
-        "source": "earthquakes",
-        "layout": {
-            "text-field": "{point_count}",
-            "text-font": [
-                "DIN Offc Pro Medium",
-                "Arial Unicode MS Bold"
-            ],
-            "text-size": 12
-        }
-    });
+    // map.addLayer({
+    //     "id": "cluster-count",
+    //     "type": "symbol",
+    //     "source": "earthquakes",
+    //     "layout": {
+    //         "text-field": "{point_count}",
+    //         "text-font": [
+    //             "DIN Offc Pro Medium",
+    //             "Arial Unicode MS Bold"
+    //         ],
+    //         "text-size": 12
+    //     }
+    // });
 });
 
 map.on('click', function (e) {
