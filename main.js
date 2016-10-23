@@ -63,9 +63,6 @@ var app = new Vue({
 // Slider
 var slider = document.getElementById('slider');
 
-console.log(momentNow);
-console.log(momentPrevious);
-
 noUiSlider.create(slider, {
 	// Create two timestamps to define a range.
     range: {
@@ -236,15 +233,22 @@ map.on('load', function() {
         }
     });
 
-    // Display the earthquake data in three layers, each filtered to a range of
-    // count values. Each range gets a different fill color.
+    // 5 layers per emotion
+    // sad = 000080 = navy
+    // surprising = DFF51D = yellow
+    // love = EE1DF5 = pink
+    // angry = F51D1D = red
+    // haha = FF7700 = orange
     var layers = [
-        [150, '#f28cb1'],
-        [20, '#f1f075'],
-        [0, '#51bbd6']
+        [200, '#000080'],
+        [150, '#ee1df5'],
+        [100, '#f51d1d'],
+        [70, '#DFF51D'],
+        [0, '#ff7700']
     ];
 
     layers.forEach(function (layer, i) {
+        console.log(i);
         map.addLayer({
             "id": "cluster-" + i,
             "type": "circle",

@@ -46,7 +46,7 @@ html, body {
 
 .graphs {
   padding: 20px;
-  display: inline-block; }
+  width: 50%; }
 
 #sidebar {
   width: 350px;
@@ -95,7 +95,8 @@ html, body {
       width: 30px;
       height: 30px;
       vertical-align: middle;
-      filter: grayscale(100%); }
+      filter: grayscale(100%);
+      transition: all 0.2s linear; }
     .filters li.selected {
       background: #396CAB; }
     .filters li.selected img {
