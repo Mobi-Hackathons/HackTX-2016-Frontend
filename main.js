@@ -43,6 +43,17 @@ var app = new Vue({
   }
 });
 
+var slider = document.getElementById('slider');
+
+noUiSlider.create(slider, {
+	start: [0, 100],
+	connect: true,
+	range: {
+		'min': 0,
+		'max': 100
+	}
+});
+
 mapboxgl.accessToken = 'pk.eyJ1IjoidXRhLW1vYmkiLCJhIjoiNTU0N2FiOWM2NjEyMzUyNjc4NTg5M2I1MGM0YjM2N2IifQ.S4guINAIENtuxT6KVlId-g';
 var map = new mapboxgl.Map({
     container: 'map',

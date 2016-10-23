@@ -79,6 +79,20 @@ html, body {
   filter: grayscale(0%);
 }
 
+#slider {
+  margin: 0 30px;
+  border: none;
+}
+
+#slider .noUi-base {
+  border-radius: 2px;
+  background: #396CAB;
+}
+
+#slider .noUi-connect {
+  background: #EF6E30;
+}
+
 .hidden {
   display: none;
 }
