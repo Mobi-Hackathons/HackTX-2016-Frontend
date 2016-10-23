@@ -10,16 +10,6 @@
   </head>
   <body>
     <div id="app">
-      <div id="earthys-house" v-on:click="hideEarthy">
-        <div id="earthy-message">
-          <p>
-            Hi, I'm Earthy!<br />
-            Do you need any help?
-          </p>
-        </div>
-        <div id="earthy"></div>
-      </div>
-
       <div id="sidebar">
         <h4 class="sidebar-header">Date</h4>
         <div id="slider"></div>
@@ -44,7 +34,18 @@
       </div>
 
       <div id="content">
-        <div id="map" v-bind:class="{hidden: show != 'map'}"></div>
+        <div id="map" v-bind:class="{hidden: show != 'map'}">
+
+          <div id="earthys-house" v-on:click="hideEarthy">
+            <div id="earthy-message">
+              <p>
+                Hi, I'm Earthy!<br />
+                Do you need any help?
+              </p>
+            </div>
+            <div id="earthy"></div>
+          </div>
+        </div>
 
         <div class="radar-graph graphs" v-bind:class="{hidden: show != 'graph'}">
           <h1>Graphs!!!</h1>
