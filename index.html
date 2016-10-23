@@ -10,9 +10,16 @@
   <body> 
 
     <div id="app">
-      <button v-on:click="toggleView">{{ show }}</button>
-      <div id="map" v-bind:class="{hidden: show != 'map'}"></div>
-      <div v-bind:class="{hidden: show != 'graph'}"><h1>Graphs!!!</h1></div>
+      <div id="sidebar">
+        <div id="bottom-button">
+          <button v-on:click="toggleView">{{ show }}</button>
+        </div>
+      </div>
+
+      <div id="content">
+        <div id="map" v-bind:class="{hidden: show != 'map'}"></div>
+        <div v-bind:class="{hidden: show != 'graph'}"><h1>Graphs!!!</h1></div>
+      </div>
     </div>
     
     <script src="node_modules/vue/dist/vue.js"></script>
