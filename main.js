@@ -1,11 +1,18 @@
 var app = new Vue({
   el: '#app',
   data: {
-    map: null,
+    show: 'map',
     message: 'Hello Vue!'
   },
   created: function() {
     console.log('created!');
+  },
+  methods: {
+    toggleView: function() {
+      console.log('pressed');
+      if(this.show === 'map') this.show = 'graph';
+      else this.show = 'map';
+    }
   }
 });
 
