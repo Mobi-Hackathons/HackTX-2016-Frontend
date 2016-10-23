@@ -96,3 +96,11 @@ html, body {
 .hidden {
   display: none;
 }
+
+.dates{
+  margin:0 30px;
+}
+
+.sidebar-header{
+  margin-left:15px;
+}

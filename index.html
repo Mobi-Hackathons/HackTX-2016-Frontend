@@ -12,10 +12,14 @@
 
     <div id="app">
       <div id="sidebar">
-        <h4>Date</h4>
+        <h4 class="sidebar-header">Date</h4>
         <div id="slider"></div>
+        <span id="event-start" class="dates"></span>
+        <br>
+        <span id="event-end"  class="dates"></span>
 
-        <h4>Filters</h4>
+
+        <h4 class="sidebar-header">Filters</h4>
         <ul class="filters">
           <li v-for="filter in filters" v-on:click="filter.selected = !filter.selected" v-bind:class="{selected: filter.selected}">
             <img v-bind:src="'images/' + filter.icon + '.png'">
