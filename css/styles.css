@@ -44,7 +44,8 @@ html, body {
   margin-right: 350px; }
 
 .graphs {
-  padding: 20px; }
+  padding: 20px;
+  display: inline-block; }
 
 #sidebar {
   width: 350px;
@@ -124,3 +125,20 @@ html, body {
 .sidebar-header {
   padding: 10px 10px 5px;
   border-bottom: 1px solid #396CAB; }
+
+#event-start {
+  float: left;
+  margin: 15px;
+  margin-left: 40px; }
+
+#event-end {
+  float: right;
+  margin: 15px;
+  margin-right: 40px; }
+
+.clearfix {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both; }

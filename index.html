@@ -52,12 +52,18 @@
             <canvas id="radar-chart" width="200" height="200"></canvas>
           </div>
         </div>
+
+        <div class="line-graph graphs" v-bind:class="{hidden: show != 'graph'}">
+          <div class="chart-wrapper">
+            <canvas id="line-chart" width="200" height="200"></canvas>
+          </div>
+        </div>
       </div>
     </div>
     
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
-    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.js"></script>
     <script src="node_modules/nouislider/distribute/nouislider.min.js"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
     <script src="node_modules/moment/min/moment.min.js"></script>

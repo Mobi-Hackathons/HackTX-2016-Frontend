@@ -79,13 +79,103 @@ noUiSlider.create(slider, {
 
     // Two more timestamps indicate the handle starting positions.
     start: [ momentPrevious, momentNow],
-
 });
+
+var dateLabels=[];
+
+// ChartJS
+var radarContext = document.getElementById("radar-chart").getContext("2d");
+var lineContext = document.getElementById("line-chart").getContext("2d");
+
+var radarData = {
+    labels: ["Surprising", "Haha", "Love", "Angry", "Sad"],
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: "rgba(179,181,198,0)",
+            borderColor: "rgba(179,181,198,1)",
+            pointBackgroundColor: "rgba(179,181,198,1)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgba(179,181,198,1)",
+            data: [65, 59, 90, 81, 75]
+        }
+    ]
+};
+
+var radarChart = new Chart(radarContext, {
+    type: 'radar',
+    backgroundColor:"#FFFFFF",
+   // title:{text:"test"},
+    data: radarData
+   // options: {chartArea:{backgroundColor:'rgba(250,250,250,1)'}}
+});
+
+
+var lineData = {
+    labels: dateLabels,
+        datasets: [
+            {
+                label: "Mood Trends Over Time",
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: [1, 2, 1, 3, 5, 1, 5],
+                spanGaps: false,
+            }
+        ]
+    }
+
+var lineChart = new Chart(lineContext,{
+    type:'line',
+    backgroundColor:"#FF0000",
+    data:lineData
+})
+
+
+
 slider.noUiSlider.on('update', function( values, handle ) {
     console.log(values);
     console.log(handle);
+    
+    // moving left bar
     if(handle==0){
+        dateLabels=[];
+        var tempNow = moment(parseInt(values[handle]));
+        var tempThen = moment(parseInt(values[1]));
         app.startDate.date= moment(parseInt(values[handle])).format('MM-DD-YYYY');
+
+        // update data
+
+        // push dates onto date labels
+        while(tempNow.isBefore(tempThen)){
+            dateLabels.push(tempNow.format('MM-DD-YYYY'));
+            tempNow.add(1,'week');
+        }
+        
+        //override date (x axis) labels
+        lineData.labels = dateLabels;
+        // create new line chart and override old one (kinda shitty, probably a memory leak)
+        var lineChart = new Chart(lineContext,{
+            type:'line',
+            backgroundColor:"#FF0000",
+            data:lineData
+        })
+        console.log(dateLabels);
     }else{
         app.endDate.date= moment(parseInt(values[handle])).format('MM-DD-YYYY');
     }
@@ -93,41 +183,6 @@ slider.noUiSlider.on('update', function( values, handle ) {
 
 });
 
-
-// ChartJS
-var radarContext = document.getElementById("radar-chart").getContext("2d");
-
-var data = {
-    labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
-    datasets: [
-        {
-            label: "My First dataset",
-            backgroundColor: "rgba(179,181,198,0.2)",
-            borderColor: "rgba(179,181,198,1)",
-            pointBackgroundColor: "rgba(179,181,198,1)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(179,181,198,1)",
-            data: [65, 59, 90, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            backgroundColor: "rgba(255,99,132,0.2)",
-            borderColor: "rgba(255,99,132,1)",
-            pointBackgroundColor: "rgba(255,99,132,1)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(255,99,132,1)",
-            data: [28, 48, 40, 19, 96, 27, 100]
-        }
-    ]
-};
-
-var radarChart = new Chart(radarContext, {
-    type: 'radar',
-    data: data,
-    //options: options
-});
 
 
 // Mapbox
