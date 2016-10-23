@@ -2,5 +2,5 @@
 
 ```
 npm install
-http-server -p 3000
+npm start
 ```
