@@ -48,6 +48,9 @@ html, body {
   padding: 20px;
   width: 50%; }
 
+.page {
+  padding: 20px; }
+
 #sidebar {
   width: 350px;
   position: absolute;
@@ -101,6 +104,23 @@ html, body {
       background: #396CAB; }
     .filters li.selected img {
       filter: grayscale(0%); }
+
+.feed {
+  margin: 0;
+  padding: 0; }
+  .feed li {
+    list-style: none;
+    background: #fff;
+    border-radius: 2px;
+    max-width: 500px;
+    color: #333;
+    margin-bottom: 10px;
+    padding: 10px; }
+    .feed li .feed-emotion {
+      color: #fff;
+      border-radius: 2px;
+      margin-right: 5px;
+      padding: 5px; }
 
 #slider {
   margin: 0 30px;

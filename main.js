@@ -7,31 +7,42 @@ var app = new Vue({
   data: {
     show: 'map',
     message: 'Hello Vue!',
+    sources: [],
     filters: [
       {
-        title: 'Surprising',
+        title: 'Wow',
         icon: 'face_surprise',
-        selected: true
+        key: 'num_wows',
+        selected: true,
+        color: '#FDD33F'
       },
       {
         title: 'Haha',
         icon: 'face_laugh',
-        selected: true
+        key: 'num_hahas',
+        selected: true,
+        color: '#1FB7FC'
       },
       {
         title: 'Love',
         icon: 'face_love',
+        key: 'num_loves',
+        color: '#FC1681',
         selected: true
       },
       {
         title: 'Angry',
         icon: 'face_angry',
-        selected: true
+        key: 'num_angrys',
+        selected: true,
+        color: '#F03035'
       },
       {
         title: 'Sad',
         icon: 'face_sad',
-        selected: true
+        key: 'num_sads',
+        selected: true,
+        color: '#000080'
       }
     ],
     startDate:{
@@ -49,6 +60,7 @@ var app = new Vue({
     toggleView: function() {
       console.log('pressed');
       if(this.show === 'map') this.show = 'graph';
+      else if(this.show === 'graph') this.show = 'page';
       else this.show = 'map';
     },
     hideEarthy: function() {
@@ -88,7 +100,7 @@ var radarData = {
     labels: ["Surprising", "Haha", "Love", "Angry", "Sad"],
     datasets: [
         {
-            label: "My First dataset",
+            label: "Emotions",
             backgroundColor: "rgba(179,181,198,0)",
             borderColor: "rgba(179,181,198,1)",
             pointBackgroundColor: "rgba(179,181,198,1)",
@@ -219,14 +231,12 @@ map.on('load', function() {
     ];
 
     $.get('https://hacktx-emotions.herokuapp.com/api/posts', function(data) {
-        console.log('got data');
+        Vue.set(app, 'sources', data);
 
         var pointdata = [];
         
         for(var i in data) {
-            console.log(i);
             var p = data[i];
-            console.log(p.location.coords);
             
             pointdata.push({
                 type: 'Feature',

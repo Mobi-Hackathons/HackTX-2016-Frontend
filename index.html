@@ -59,6 +59,26 @@
           </div>
         </div>
       </div>
+
+      <div v-bind:class="{hidden: show != 'page'}" class="page"> 
+        <h1>Feed</h1>
+        <ul v-for="source in sources" class="feed">
+          <li v-for="post in source.posts">
+            <p>
+              {{ post.status_message }}
+            </p>
+
+            <div>
+              <span v-for="f in filters">
+                <span v-if="post[f.key] > 0" v-bind:style="{ backgroundColor: f.color }" class="feed-emotion">
+                  {{ f.title }}
+                  {{ post[f.key] }}
+                </span>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
     
     <script src="node_modules/jquery/dist/jquery.min.js"></script>

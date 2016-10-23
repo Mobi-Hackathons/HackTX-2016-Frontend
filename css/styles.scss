@@ -60,7 +60,11 @@ html, body {
 
 .graphs {
   padding: 20px;
-  width:50%
+  width: 50%
+}
+
+.page {
+  padding: 20px;
 }
 
 #sidebar {
@@ -128,6 +132,28 @@ html, body {
 
     &.selected img {
       filter: grayscale(0%);
+    }
+  }
+}
+
+.feed {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    background: #fff;
+    border-radius: 2px;
+    max-width: 500px;
+    color: #333;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    .feed-emotion {
+      color: #fff;
+      border-radius: 2px;
+      margin-right: 5px;
+      padding: 5px
     }
   }
 }
