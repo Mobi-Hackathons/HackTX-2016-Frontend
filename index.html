@@ -11,8 +11,14 @@
 
     <div id="app">
       <div id="sidebar">
-        <ul>
-          <li><img src="images/face_laugh.png" alt=""></li>
+        <h4>Date</h4>
+
+        <h4>Filters</h4>
+        <ul class="filters">
+          <li v-for="filter in filters">
+            <img v-bind:src="'images/' + filter.icon + '.png'">
+            <span class="filter-text">{{ filter.title }}</span>
+          </li>
         </ul>
 
         <div id="bottom-button">
