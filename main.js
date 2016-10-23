@@ -140,9 +140,6 @@ var map = new mapboxgl.Map({
 });
 
 
-
-
-
 map.on('load', function() {
 
     // Add a new source from our GeoJSON data and set the
@@ -209,4 +206,17 @@ map.on('load', function() {
             "text-size": 12
         }
     });
+});
+
+map.on('click', function (e) {
+    console.log('clicked');
+    console.log(e);
+    // Use queryRenderedFeatures to get features at a click event's point
+    // Use layer option to avoid getting results from other layers
+    var features = map.queryRenderedFeatures(e.point, { layers: ['earthquakes'] });
+    // if there are features within the given radius of the click event,
+    // fly to the location of the click event
+    if(features.length) {
+      console.log(features[0]);
+    }
 });
