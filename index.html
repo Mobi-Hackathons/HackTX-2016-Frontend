@@ -10,6 +10,16 @@
   </head>
   <body>
     <div id="app">
+      <div id="earthys-house" v-on:click="hideEarthy">
+        <div id="earthy-message">
+          <p>
+            Hi, I'm Earthy!<br />
+            Do you need any help?
+          </p>
+        </div>
+        <div id="earthy"></div>
+      </div>
+
       <div id="sidebar">
         <h4 class="sidebar-header">Date</h4>
         <div id="slider"></div>
@@ -43,6 +53,7 @@
       </div>
     </div>
     
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
     <script src="node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="node_modules/nouislider/distribute/nouislider.min.js"></script>

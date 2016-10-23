@@ -48,12 +48,19 @@ var app = new Vue({
   },
   created: function() {
     console.log('created!');
+    setInterval(this.showEarthy, 5000);
   },
   methods: {
     toggleView: function() {
       console.log('pressed');
       if(this.show === 'map') this.show = 'graph';
       else this.show = 'map';
+    },
+    hideEarthy: function() {
+        $("#earthy-message").hide();
+    },
+    showEarthy: function() {
+        $("#earthy-message").show();
     }
   }
 });
