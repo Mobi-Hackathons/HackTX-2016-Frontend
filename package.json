@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/Mobi-Hackathons/HackTX-2016-Frontend#readme",
   "dependencies": {
-    "mapbox-gl": "^0.26.0",
     "vue": "^2.0.3"
   }
 }

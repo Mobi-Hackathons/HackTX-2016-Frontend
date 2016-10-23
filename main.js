@@ -2,7 +2,29 @@ var app = new Vue({
   el: '#app',
   data: {
     show: 'map',
-    message: 'Hello Vue!'
+    message: 'Hello Vue!',
+    filters: [
+      {
+        title: 'Surprising',
+        icon: 'face_surprise'
+      },
+      {
+        title: 'Haha',
+        icon: 'face_laugh'
+      },
+      {
+        title: 'Love',
+        icon: 'face_love'
+      },
+      {
+        title: 'Angry',
+        icon: 'face_angry'
+      },
+      {
+        title: 'Sad',
+        icon: 'face_sad'
+      }
+    ]
   },
   created: function() {
     console.log('created!');
