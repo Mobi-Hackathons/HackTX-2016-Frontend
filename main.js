@@ -68,6 +68,12 @@ var app = new Vue({
     },
     showEarthy: function() {
         $("#earthy-message").show();
+    },
+    shouldShow: function(post) {
+        for(var f of this.filters) {
+            if(f.selected && post[f.key] > 0) return true;
+        }
+        return false;
     }
   }
 });
