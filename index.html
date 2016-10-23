@@ -24,17 +24,24 @@
         </ul>
 
         <div id="bottom-button">
-          <button v-on:click="toggleView">{{ show }}</button>
+          <button v-on:click="toggleView">toggle {{ show }}</button>
         </div>
       </div>
 
       <div id="content">
         <div id="map" v-bind:class="{hidden: show != 'map'}"></div>
-        <div v-bind:class="{hidden: show != 'graph'}"><h1>Graphs!!!</h1></div>
+
+        <div class="graphs" v-bind:class="{hidden: show != 'graph'}">
+          <h1>Graphs!!!</h1>
+          <div class="chart-wrapper">
+            <canvas id="radar-chart" width="200" height="200"></canvas>
+          </div>
+        </div>
       </div>
     </div>
     
     <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="node_modules/nouislider/distribute/nouislider.min.js"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
     <script src="main.js"></script>

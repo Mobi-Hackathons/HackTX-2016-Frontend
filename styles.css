@@ -4,11 +4,17 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: 'Aller';
+  background: #396CAB;
+  color: #FFF;
 }
 
 #map {
   height: 100vh;
   margin-right: 350px;
+}
+
+.graphs {
+  padding: 20px;
 }
 
 #sidebar {
@@ -95,4 +101,12 @@ html, body {
 
 .hidden {
   display: none;
+}
+
+.chart-wrapper {
+  width: 400px;
+  height: 400px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 2px;
 }
